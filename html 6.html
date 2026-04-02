@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Portfolio — Haygriv Gajjar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Syne:wght@400;700;800&family=Anton&family=Playfair+Display:wght@700&family=Space+Mono&family=DM+Sans:wght@300;400;500&family=Manrope:wght@400;700&family=Outfit:wght@300;400;700&family=IBM+Plex+Mono&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0a0a08;--bg2:#111110;--surface:#161614;--border:#383838;--accent:#ff5c1a;--accent2:#ffd60a;--text:#f0ede6;--muted:#888880;--font-display:'Bebas Neue', sans-serif;--font-body:'Syne', sans-serif;--font-mono:'DM Mono', monospace;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;overflow-x:hidden;cursor:none;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.4;}
+#cursor{position:fixed;width:12px;height:12px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s,background 0.2s;mix-blend-mode:difference;}#cursor-ring{position:fixed;width:40px;height:40px;border:1px solid rgba(255,92,26,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.12s ease;}body:has(a:hover) #cursor,body:has(button:hover) #cursor{width:20px;height:20px;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 4rem;background:rgba(10,10,8,0.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:var(--font-display);font-size:1.8rem;letter-spacing:0.05em;color:var(--text);text-decoration:none;}.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}.nav-links a{font-family:var(--font-mono);font-size:0.75rem;color:var(--muted);text-decoration:none;text-transform:uppercase;letter-spacing:0.12em;transition:color 0.2s;position:relative;}.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width 0.3s;}.nav-links a:hover{color:var(--text);}.nav-links a:hover::after{width:100%;}
+#hero{min-height:100vh;display:flex;align-items:center;padding:0 4rem;position:relative;overflow:hidden;}
+.hero-bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,92,26,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,92,26,0.04) 1px,transparent 1px);background-size:60px 60px;animation:gridPan 20s linear infinite;}.@keyframes gridPan{0%{transform:translateY(0);}100%{transform:translateY(60px);}}
+.hero-glow{position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(255,92,26,0.12) 0%,transparent 70%);top:50%;left:60%;transform:translate(-50%,-50%);animation:glowPulse 4s ease-in-out infinite;}@keyframes glowPulse{0%,100%{opacity:0.6;transform:translate(-50%,-50%) scale(1);}50%{opacity:1;transform:translate(-50%,-50%) scale(1.1);}}
+.hero-content{position:relative;z-index:2;max-width:900px;}
+.hero-tag{font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem;opacity:0;animation:fadeUp 0.6s ease forwards 0.3s;}.hero-tag::before{content:'';display:block;width:30px;height:1px;background:var(--accent);}
+.hero-name{font-family:var(--font-display);font-size:110px;line-height:0.9;letter-spacing:0.02em;color:var(--text);opacity:0;animation:fadeUp 0.7s ease forwards 0.5s;}.hero-name .accent-line{color:var(--accent);display:block;}
+.hero-desc{font-family:var(--font-body);font-size:1.05rem;color:var(--muted);max-width:480px;line-height:1.8;margin-top:2rem;opacity:0;animation:fadeUp 0.7s ease forwards 0.7s;}
+.hero-actions{margin-top:3rem;display:flex;gap:1.5rem;align-items:center;opacity:0;animation:fadeUp 0.7s ease forwards 0.9s;}
+.btn-primary{background:var(--accent);color:#0a0a08;font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;padding:1rem 2.5rem;border:none;cursor:pointer;text-decoration:none;position:relative;overflow:hidden;transition:transform 0.2s;display:inline-block;}.btn-primary::before{content:'';position:absolute;inset:0;background:var(--accent2);transform:translateX(-100%);transition:transform 0.3s ease;}.btn-primary:hover::before{transform:translateX(0);}.btn-primary span{position:relative;z-index:1;}.btn-primary:hover{transform:translateY(-2px);}
+.btn-ghost{font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:2px;transition:color 0.2s,border-color 0.2s;}.btn-ghost:hover{color:var(--text);border-color:var(--text);}
+.hero-scroll-hint{position:absolute;bottom:2.5rem;left:4rem;font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);letter-spacing:0.15em;writing-mode:vertical-rl;display:flex;align-items:center;gap:1rem;opacity:0;animation:fadeUp 0.6s ease forwards 1.3s;}.hero-scroll-hint::after{content:'';display:block;width:1px;height:60px;background:var(--border);}
+.hero-counter{position:absolute;right:4rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2.5rem;z-index:2;}.counter-item{text-align:right;}.counter-num{font-family:var(--font-display);font-size:3rem;color:var(--text);line-height:1;}.counter-num span{color:var(--accent);}.counter-label{font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;margin-top:0.25rem;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+.marquee-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;background:var(--surface);}.marquee-track{display:flex;gap:3rem;animation:marquee 20s linear infinite;width:max-content;}.marquee-item{font-family:var(--font-display);font-size:1.2rem;letter-spacing:0.08em;color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:3rem;}.marquee-item .dot{color:var(--accent);font-size:0.6rem;}@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+section{padding:7rem 4rem;}.section-label{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.25em;color:var(--accent);text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;}.section-label::before{content:attr(data-num);color:var(--border);font-size:0.7rem;}.section-title{font-family:var(--font-display);font-size:55px;line-height:0.95;letter-spacing:0.02em;margin-bottom:4rem;}
+#about{background:var(--bg);}.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;}.about-text p{font-size:1.05rem;line-height:1.9;color:var(--muted);margin-bottom:1.5rem;}.about-text p strong{color:var(--text);font-weight:700;}.about-highlight{margin-top:3rem;padding:2rem;border:1px solid var(--border);border-left:3px solid var(--accent);font-family:var(--font-mono);font-size:0.85rem;font-style:italic;color:var(--muted);line-height:1.8;}
+.currently-box{background:var(--surface);border:1px solid var(--border);padding:2.5rem;}.currently-title{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;margin-bottom:2rem;}.currently-item{display:flex;align-items:flex-start;gap:1rem;padding:1.25rem 0;border-bottom:1px solid var(--border);}.currently-item:last-child{border-bottom:none;}.currently-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;margin-top:6px;flex-shrink:0;animation:pulse 2s ease-in-out infinite;}.currently-item-text{font-size:0.9rem;color:var(--text);line-height:1.5;}.currently-item-sub{font-size:0.75rem;color:var(--muted);margin-top:0.2rem;font-family:var(--font-mono);}@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(255,92,26,0.4);}50%{opacity:0.8;box-shadow:0 0 0 6px rgba(255,92,26,0);}}
+#projects{background:var(--bg2);}.projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border);border:1px solid var(--border);}.project-card{background:#0a0a08;padding:48px;border-radius:0px;position:relative;overflow:hidden;cursor:pointer;transition:background 0.3s;}.project-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,92,26,0.06) 0%,transparent 60%);opacity:0;transition:opacity 0.3s;}.project-card:hover{background:#161614;}.project-card:hover::before{opacity:1;}.project-num{font-family:var(--font-display);font-size:5rem;color:rgba(255,92,26,0.08);position:absolute;top:1rem;right:2rem;line-height:1;transition:color 0.3s;display:block;}.project-card:hover .project-num{color:rgba(255,92,26,0.15);}.project-tag{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.15em;color:#ff5c1a;text-transform:uppercase;margin-bottom:1.25rem;}.project-title{font-family:var(--font-display);font-size:35px;letter-spacing:0.03em;line-height:1;margin-bottom:1rem;position:relative;z-index:1;}.project-desc{font-size:0.875rem;color:var(--muted);line-height:1.8;max-width:380px;margin-bottom:2rem;}.project-link{font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.1em;color:var(--muted);background:none;border:none;cursor:pointer;text-transform:uppercase;display:inline-flex;align-items:center;gap:0.5rem;transition:color 0.2s;}.project-link:hover{color:var(--accent);}.project-link .arrow{display:inline-block;transition:transform 0.2s;}.project-link:hover .arrow{transform:translateX(4px);}
+.project-featured{grid-column:1/-1;display:grid;grid-template-columns:1.2fr 1fr;gap:0;}.project-featured .project-card{padding:58px;}.project-featured-visual{background:var(--surface);display:flex;align-items:center;justify-content:center;min-height:300px;position:relative;overflow:hidden;}.vis-graphic{width:160px;height:160px;border:1px solid #2a2a26;transform:rotate(15deg);position:relative;animation:spinSlow 12s linear infinite;}.vis-graphic::before{content:'';position:absolute;inset:20px;border:1px solid rgba(255,92,26,0.3);animation:spinSlow 8s linear infinite reverse;}.vis-graphic::after{content:'';position:absolute;inset:50%;width:8px;height:8px;background:var(--accent);transform:translate(-50%,-50%);border-radius:50%;}@keyframes spinSlow{from{transform:rotate(15deg);}to{transform:rotate(375deg);}}
+#skills{background:var(--bg);}.skills-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}.skill-group{padding:2.5rem;border:1px solid var(--border);position:relative;transition:border-color 0.3s;}.skill-group::after{content:'';position:absolute;top:0;left:0;width:0;height:2px;background:var(--accent);transition:width 0.4s ease;}.skill-group:hover{border-color:rgba(255,92,26,0.3);}.skill-group:hover::after{width:100%;}.skill-group-title{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;margin-bottom:1.75rem;}.skill-list{list-style:none;display:flex;flex-direction:column;gap:1rem;}.skill-item{display:flex;justify-content:space-between;align-items:center;font-size:0.875rem;color:var(--text);}.skill-bar-wrap{width:80px;height:2px;background:var(--border);overflow:hidden;}.skill-bar{height:100%;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 0.8s ease;}.skill-group:hover .skill-bar{transform:scaleX(1);}
+#process{background:var(--bg2);}.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);}.process-step{padding:3rem 2.5rem;border-right:1px solid var(--border);position:relative;overflow:hidden;transition:background 0.3s;}.process-step:last-child{border-right:none;}.process-step:hover{background:var(--surface);}.step-num{font-family:var(--font-display);font-size:6rem;color:var(--border);line-height:1;margin-bottom:1.5rem;transition:color 0.3s;}.process-step:hover .step-num{color:rgba(255,92,26,0.15);}.step-title{font-family:var(--font-body);font-size:1.1rem;font-weight:700;margin-bottom:1rem;}.step-desc{font-size:0.825rem;color:var(--muted);line-height:1.8;}
+#tools{background:var(--bg);}.tools-grid{display:flex;flex-wrap:wrap;gap:1rem;}.tool-chip{font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.05em;color:var(--muted);border:1px solid var(--border);padding:0.6rem 1.25rem;transition:all 0.2s;}.tool-chip:hover{color:var(--accent);border-color:var(--accent);background:rgba(255,92,26,0.05);}.tool-chip.featured{color:var(--text);border-color:rgba(255,92,26,0.4);background:rgba(255,92,26,0.06);}
+#testimonials{background:var(--bg2);}.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}.testimonial-card{padding:2.5rem;border:1px solid var(--border);background:var(--bg);position:relative;}.testimonial-card::before{content:'"';font-family:var(--font-display);font-size:6rem;color:rgba(255,92,26,0.12);position:absolute;top:-0.5rem;left:1.5rem;line-height:1;}.testimonial-text{font-size:0.9rem;line-height:1.85;color:var(--muted);margin-bottom:2rem;position:relative;z-index:1;}.testimonial-author{display:flex;align-items:center;gap:1rem;}.author-avatar{width:40px;height:40px;background:var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1rem;color:var(--accent);}.author-name{font-weight:700;font-size:0.9rem;}.author-role{font-size:0.75rem;color:var(--muted);font-family:var(--font-mono);}
+#contact{background:var(--bg);position:relative;overflow:hidden;}.contact-bg-text{position:absolute;font-family:var(--font-display);font-size:clamp(8rem,18vw,18rem);color:rgba(255,255,255,0.02);bottom:-2rem;right:-2rem;line-height:1;pointer-events:none;letter-spacing:-0.02em;}.contact-inner{max-width:700px;position:relative;z-index:1;}.contact-heading{font-family:var(--font-display);font-size:clamp(4rem,8vw,7rem);line-height:0.9;letter-spacing:0.02em;margin-bottom:2rem;}.contact-heading .line2{color:var(--accent);}.contact-subtext{font-size:1rem;color:var(--muted);line-height:1.8;margin-bottom:3rem;max-width:480px;}.contact-links{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);margin-bottom:3rem;}.contact-link-item{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2rem;border-bottom:1px solid var(--border);text-decoration:none;transition:background 0.2s,padding-left 0.3s;}.contact-link-item:last-child{border-bottom:none;}.contact-link-item:hover{background:var(--surface);padding-left:2.5rem;}.contact-link-platform{font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;}.contact-link-handle{font-size:1rem;font-weight:700;color:var(--text);}.contact-link-arrow{color:var(--accent);font-size:1.2rem;}
+footer{padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}footer p{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;color:var(--muted);}footer .foot-accent{color:var(--accent);}
+.pp{position:fixed;inset:0;background:var(--bg);z-index:200;overflow-y:auto;transform:translateX(100%);transition:transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);}.pp.pp-open{transform:translateX(0);}.pp-bar{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 4rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:#0a0a08ee;backdrop-filter:blur(12px);z-index:10;}.pp-back{background:none;border:1px solid rgba(255,92,26,0.4);color:var(--accent);padding:0.6rem 1.5rem;cursor:pointer;font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.2s;}.pp-back:hover{background:var(--accent);color:#000;}.pp-cat{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);}.pp-body{padding:5rem 4rem;max-width:860px;}.pp-title{font-family:var(--font-display);font-size:clamp(3rem,8vw,7rem);line-height:0.9;letter-spacing:0.02em;margin-bottom:2.5rem;color:var(--text);}.pp-overview{font-size:1.1rem;color:var(--muted);line-height:1.9;margin-bottom:3.5rem;}.pp-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;border-top:1px solid var(--border);padding-top:2rem;}.pp-meta-item{display:flex;flex-direction:column;gap:0.5rem;}.pp-meta-lbl{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 700ms ease,transform 700ms ease;}.reveal.visible{opacity:1;transform:translateY(0);}
+@media(max-width:900px){nav{padding:1.25rem 2rem;}.nav-links{display:none;}section{padding:5rem 2rem;}#hero{padding:0 2rem;}.hero-counter{display:none;}.about-grid{grid-template-columns:1fr;gap:3rem;}.projects-grid{grid-template-columns:1fr;}.project-featured{grid-template-columns:1fr;}.skills-wrap{grid-template-columns:1fr;}.process-steps{grid-template-columns:1fr 1fr;}.testimonial-grid{grid-template-columns:1fr;}footer{flex-direction:column;gap:1rem;text-align:center;}}
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+<nav>
+  <a href="#" class="nav-logo">h<span>.</span>gajjar</a>
+  <ul class="nav-links"><li><a href="#about">About</a></li><li><a href="#projects">Work</a></li><li><a href="#skills">Skills</a></li><li><a href="#process">Process</a></li><li><a href="#contact">Contact</a></li></ul>
+</nav>
+<section id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Available for Work · Based in India</div>
+    <h1 class="hero-name">haygriv<span class="accent-line">gajjar</span></h1>
+    <p class="hero-desc">Product Designer &amp; Creative mind— crafting experiences where bold ideas meet seamless interaction. I build, integrate, and ship.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary"><span>View My Work</span></a>
+      <a href="#contact" class="btn-ghost">Let&#39;s Collaborate →</a>
+    </div>
+  </div>
+  <div class="hero-counter"><div class="counter-item"><div class="counter-num">9<span>+</span></div><div class="counter-label">Projects</div></div><div class="counter-item"><div class="counter-num">3<span>+</span></div><div class="counter-label">Years Exp</div></div><div class="counter-item"><div class="counter-num">8<span>+</span></div><div class="counter-label">Clients</div></div></div>
+  <div class="hero-scroll-hint">Scroll</div>
+</section>
+<div class="marquee-wrap"><div class="marquee-track"><div class="marquee-item">Product Design <span class="dot">◆</span></div><div class="marquee-item">UI / UX <span class="dot">◆</span></div><div class="marquee-item">Interaction Design <span class="dot">◆</span></div><div class="marquee-item">3D modeling <span class="dot">◆</span></div><div class="marquee-item">Prototyping <span class="dot">◆</span></div><div class="marquee-item">Brand Identity <span class="dot">◆</span></div><div class="marquee-item">Motion Design <span class="dot">◆</span></div><div class="marquee-item">Creative Tech <span class="dot">◆</span></div><div class="marquee-item">Product Design <span class="dot">◆</span></div><div class="marquee-item">UI / UX <span class="dot">◆</span></div><div class="marquee-item">Interaction Design <span class="dot">◆</span></div><div class="marquee-item">3D modeling <span class="dot">◆</span></div><div class="marquee-item">Prototyping <span class="dot">◆</span></div><div class="marquee-item">Brand Identity <span class="dot">◆</span></div><div class="marquee-item">Motion Design <span class="dot">◆</span></div><div class="marquee-item">Creative Tech <span class="dot">◆</span></div></div></div>
+<section id="about">
+  <div class="section-label" data-num="01">About Me</div>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <h2 class="section-title">The Mind<br/>Behind It</h2>
+      <p>I’m a product design major with a focus on building thoughtful, functional solutions, complemented by a minor in interaction design that shapes how users engage with them.</p><p>My work explores the balance between physical form and digital behavior — from concept development to refined user experiences. I focus on creating products that are not only well-designed, but intuitive, responsive, and meaningful in use.</p>
+      <div class="about-highlight">“I don’t just design screens — I design products, systems, and the flows that connect form with function. From physical builds to digital interactions, I focus on the small details that make an experience feel intuitive, tangible, and alive.”
+</div>
+    </div>
+    <div><div class="currently-box">
+      <div class="currently-title">Currently</div>
+      <div class="currently-item"><div class="currently-dot"></div><div><div class="currently-item-text">Building an webpage for 3d model development (Personal project)</div><div class="currently-item-sub">Claude AI + Fusion (3D modeling software) </div></div></div><div class="currently-item"><div class="currently-dot"></div><div><div class="currently-item-text">Designing concept units for oil extraction </div><div class="currently-item-sub">3D Modeling · Renderings · CAD measurements </div></div></div><div class="currently-item"><div class="currently-dot"></div><div><div class="currently-item-text">Concept NOTHING PAD 1</div><div class="currently-item-sub">brand identity · brand study ·designing from scratch </div></div></div><div class="currently-item"><div class="currently-dot"></div><div><div class="currently-item-text">Open to freelance &amp; collabs</div><div class="currently-item-sub">Product · UI · Branding</div></div></div>
+    </div></div>
+  </div>
+</section>
+<section id="projects">
+  <div class="section-label" data-num="02">Selected Work</div>
+  <h2 class="section-title reveal">Projects That<br/>Define Me</h2>
+  <div class="projects-grid reveal">
+    
+    <div class="project-featured">
+      <div class="project-card" onclick="openPP(1)">
+        <div class="project-num">01</div>
+        <div class="project-tag">UI Design · Figma · HTML</div>
+        <div class="project-title">Smart Laundry Portal</div>
+        <p class="project-desc">College-grade laundry management system with full student and staff portals, interactive booking flow, slot grids, and live animations.</p>
+        <button class="project-link" onclick="event.stopPropagation();openPP(1)">View Case Study <span class="arrow">→</span></button>
+      </div>
+      <div class="project-featured-visual"><div class="vis-graphic"></div></div>
+    </div>
+    <div class="project-card" onclick="openPP(2)">
+      <div class="project-num">02</div>
+      <div class="project-tag">Concept · Fusion 360</div>
+      <div class="project-title">Nothing Pad 1</div>
+      <p class="project-desc">Concept tablet render inspired by Nothing&#39;s raw, transparent design language.</p>
+      <button class="project-link" onclick="event.stopPropagation();openPP(2)">View Project <span class="arrow">→</span></button>
+    </div>
+    <div class="project-card" onclick="openPP(3)">
+      <div class="project-num">03</div>
+      <div class="project-tag">Product · App Design</div>
+      <div class="project-title">Food Order Wireframe</div>
+      <p class="project-desc">5-screen interactive wireframe for an Indian food ordering app.</p>
+      <button class="project-link" onclick="event.stopPropagation();openPP(3)">View Prototype <span class="arrow">→</span></button>
+    </div>
+    <div class="project-card" onclick="openPP(4)">
+      <div class="project-num">04</div>
+      <div class="project-tag">Electronics · DIY</div>
+      <div class="project-title">18650 Powerbank</div>
+      <p class="project-desc">Custom powerbank build with TP4056 + MT3608 circuit and 3D-printed enclosure.</p>
+      <button class="project-link" onclick="event.stopPropagation();openPP(4)">See Build Log <span class="arrow">→</span></button>
+    </div>
+    <div class="project-card" onclick="openPP(10)">
+      <div class="project-num">05</div>
+      <div class="project-tag">Type · Tool</div>
+      <div class="project-title">New Project</div>
+      <p class="project-desc">Description here.</p>
+      <button class="project-link" onclick="event.stopPropagation();openPP(10)">View Project <span class="arrow">→</span></button>
+    </div>
+    <div class="project-card" onclick="openPP(11)">
+      <div class="project-num">06</div>
+      <div class="project-tag">Type · Tool</div>
+      <div class="project-title">New Project</div>
+      <p class="project-desc">Description here.</p>
+      <button class="project-link" onclick="event.stopPropagation();openPP(11)">View Project <span class="arrow">→</span></button>
+    </div>
+    <div class="project-card" onclick="openPP(12)">
+      <div class="project-num">07</div>
+      <div class="project-tag">Type · Tool</div>
+      <div class="project-title">New Project</div>
+      <p class="project-desc">Description here.</p>
+      <button class="project-link" onclick="event.stopPropagation();openPP(12)">View Project <span class="arrow">→</span></button>
+    </div>
+  </div>
+</section>
+<section id="skills">
+  <div class="section-label" data-num="03">Capabilities</div>
+  <h2 class="section-title reveal">What I<br/>Bring</h2>
+  <div class="skills-wrap reveal">
+    <div class="skill-group"><div class="skill-group-title">Design &amp; Creative Production</div><ul class="skill-list"><li class="skill-item">Product Design <div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div></li><li class="skill-item">UI / UX <div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div></li><li class="skill-item">Photoshop <div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></li><li class="skill-item">Figma <div class="skill-bar-wrap"><div class="skill-bar" style="width:78%"></div></div></li><li class="skill-item">Motion / Animation <div class="skill-bar-wrap"><div class="skill-bar" style="width:45%"></div></div></li><li class="skill-item">Visual Hook (media) <div class="skill-bar-wrap"><div class="skill-bar" style="width:60%"></div></div></li><li class="skill-item">Content Writing <div class="skill-bar-wrap"><div class="skill-bar" style="width:78%"></div></div></li></ul></div>
+    <div class="skill-group"><div class="skill-group-title">Digital Tools &amp; Interactive Media</div><ul class="skill-list"><li class="skill-item">Readymag <div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div></li><li class="skill-item">TouchDesigner <div class="skill-bar-wrap"><div class="skill-bar" style="width:25%"></div></div></li><li class="skill-item">AI Prompting <div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div></li><li class="skill-item">Content Strategy <div class="skill-bar-wrap"><div class="skill-bar" style="width:74%"></div></div></li><li class="skill-item">Premier pro <div class="skill-bar-wrap"><div class="skill-bar" style="width:25%"></div></div></li><li class="skill-item">DaVinci Resolve <div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div></li></ul></div>
+    <div class="skill-group"><div class="skill-group-title">Engineering, 3D &amp; Technical Skills</div><ul class="skill-list"><li class="skill-item">Fusion 360 <div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div></li><li class="skill-item">Solid works <div class="skill-bar-wrap"><div class="skill-bar" style="width:30%"></div></div></li><li class="skill-item">Auto Cad <div class="skill-bar-wrap"><div class="skill-bar" style="width:60%"></div></div></li><li class="skill-item">3D Modeling <div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></li><li class="skill-item">3D Scanning &amp; Printing <div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div></li><li class="skill-item">Scratch <div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div></li><li class="skill-item">Electronics / DIY <div class="skill-bar-wrap"><div class="skill-bar" style="width:65%"></div></div></li></ul></div>
+  </div>
+</section>
+<section id="process">
+  <div class="section-label" data-num="04">My Process</div>
+  <h2 class="section-title reveal">How I<br/>Work</h2>
+  <div class="process-steps reveal"><div class="process-step"><div class="step-num">01</div><div class="step-title">Discover</div><p class="step-desc">Dive deep into the problem space. Understand users, context, and constraints before opening any design tools.</p></div><div class="process-step"><div class="step-num">02</div><div class="step-title">Define</div><p class="step-desc">Turn insights into a clear direction. Define goals, success metrics, and guiding principles.</p></div><div class="process-step"><div class="step-num">03</div><div class="step-title">Design</div><p class="step-desc">Sketch, prototype, and iterate rapidly. Test early, refine often, and make bold design decisions.</p></div><div class="process-step"><div class="step-num">04</div><div class="step-title">Launch</div><p class="step-desc">Deliver polished outputs or ship the product. Ensure smooth handoff, clear documentation, and continued support post-launch.</p></div></div>
+</section>
+<section id="tools">
+  <div class="section-label" data-num="05">Creative side core keywords</div>
+  <h2 class="section-title reveal">Craft &amp;<br/>Playground</h2>
+  <div class="tools-grid reveal"><span class="tool-chip">User Research</span><span class="tool-chip">Problem Solving</span><span class="tool-chip">Interaction Design</span><span class="tool-chip">Rapid Prototyping</span><span class="tool-chip">Interface Systems</span><span class="tool-chip">Visual Design</span><span class="tool-chip">Design Strategy</span><span class="tool-chip">Creative Coding</span><span class="tool-chip">Responsive Design</span><span class="tool-chip">Micro Interactions</span><span class="tool-chip">Motion Design</span><span class="tool-chip">3D Design</span><span class="tool-chip">Digital Fabrication</span><span class="tool-chip">Hardware Prototyping</span><span class="tool-chip">Prompt Design</span><span class="tool-chip">Automation</span><span class="tool-chip">Content Systems</span><span class="tool-chip">Storytelling</span><span class="tool-chip">Brand Thinking</span><span class="tool-chip">Visual Hooks</span><span class="tool-chip">Experience Design</span></div>
+</section>
+<section id="testimonials">
+  <div class="section-label" data-num="06">Kind Words</div>
+  <h2 class="section-title reveal">What People<br/>Say</h2>
+  <div class="testimonial-grid reveal"><div class="testimonial-card"><p class="testimonial-text">Exceptional attention to detail and a genuine curiosity for solving the right problem. Every deliverable came with thoughtful rationale.Exceptional attention to detail and a genuine curiosity for solving the right problem. Every deliverable came with thoughtful rationale.Exceptional attention to detail and a genuine curiosity for solving the right problem. Every deliverable came with thoughtful rationale.</p><div class="testimonial-author"><div class="author-avatar">A</div><div><div class="author-name">Add Name Here</div><div class="author-role">Role · Company</div></div></div></div><div class="testimonial-card"><p class="testimonial-text">Goes beyond the brief. Not just a designer — a strategic thinker who cares about outcomes.</p><div class="testimonial-author"><div class="author-avatar">B</div><div><div class="author-name">Add Name Here</div><div class="author-role">Role · Company</div></div></div></div><div class="testimonial-card"><p class="testimonial-text">The only designer I know who can sketch a concept, prototype it in Figma, and ship the HTML in the same week.</p><div class="testimonial-author"><div class="author-avatar">C</div><div><div class="author-name">Add Name Here</div><div class="author-role">Role · Company</div></div></div></div></div>
+</section>
+<section id="contact">
+  <div class="contact-bg-text">HELLO</div>
+  <div class="contact-inner reveal">
+    <div class="section-label" data-num="07">Contact</div>
+    <h2 class="contact-heading">Let&#39;s Build<br/><span class="line2">Something.</span></h2>
+    <p class="contact-subtext">Got a project, collab, or just want to talk design and tech? My inbox is open. Let&#39;s make something worth remembering.</p>
+    <div class="contact-links">
+      <a href="mailto:hygrv.dsgn@gmail.com" class="contact-link-item"><div><div class="contact-link-platform">Email</div><div class="contact-link-handle">hygrv.dsgn@gmail.com</div></div><span class="contact-link-arrow">↗</span></a>
+      <a href="#https://www.instagram.com/hygrv.dsgn?igsh=M3B5M25oMDhoMDNv" class="contact-link-item"><div><div class="contact-link-platform">Instagram</div><div class="contact-link-handle">@hygrv.dsgn &amp; @haygriv.gajjar</div></div><span class="contact-link-arrow">↗</span></a>
+      <a href="https://linkedin.com/in/yourname" class="contact-link-item"><div><div class="contact-link-platform">LinkedIn</div><div class="contact-link-handle">in/yourname</div></div><span class="contact-link-arrow">↗</span></a>
+    </div>
+    <a href="mailto:hygrv.dsgn@gmail.com" class="btn-primary"><span>Start a Conversation</span></a>
+  </div>
+</section>
+<footer>
+  <p>© 2026 <span class="foot-accent">Haygriv Gajjar</span> · Designed &amp; Built with obsession</p>
+  <p>Ahmedabad, India · <span class="foot-accent">Open to Work</span></p>
+</footer>
+
+<div id="pp-1" class="pp" style="display:none">
+  <div class="pp-bar">
+    <button class="pp-back" onclick="closePP()">← Back to Portfolio</button>
+    <span class="pp-cat">UI Design · Figma · HTML</span>
+  </div>
+  <div class="pp-body" style="position:relative">
+    
+    <div class="pp-title">Smart Laundry Portal</div>
+    <p class="pp-overview">A mobile-first laundry management system for college hostels. Covers machine booking, slot management, and a full staff portal with admin controls.</p>
+    <div class="pp-meta">
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Role</span><span>UX Designer · Frontend Developer</span></div>
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Tools</span><span>Figma, HTML/CSS/JS</span></div>
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Outcome</span><span>Fully interactive single-file prototype deployed for college use.</span></div>
+    </div>
+  </div>
+</div>
+<div id="pp-2" class="pp" style="display:none">
+  <div class="pp-bar">
+    <button class="pp-back" onclick="closePP()">← Back to Portfolio</button>
+    <span class="pp-cat">Concept · Fusion 360</span>
+  </div>
+  <div class="pp-body" style="position:relative">
+    
+    <div class="pp-title">Nothing Pad 1</div>
+    <p class="pp-overview">A speculative product concept tablet using Nothing&#39;s Glyph Matrix and translucent PCB aesthetic.</p>
+    <div class="pp-meta">
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Role</span><span>Product Designer</span></div>
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Tools</span><span>Fusion 360, Canva</span></div>
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Outcome</span><span>Industrial design sheet, poster renders, and full spec document.</span></div>
+    </div>
+  </div>
+</div>
+<div id="pp-3" class="pp" style="display:none">
+  <div class="pp-bar">
+    <button class="pp-back" onclick="closePP()">← Back to Portfolio</button>
+    <span class="pp-cat">Product · App Design</span>
+  </div>
+  <div class="pp-body" style="position:relative">
+    
+    <div class="pp-title">Food Order Wireframe</div>
+    <p class="pp-overview">High-fidelity wireframe exploring Indian food delivery UX patterns.</p>
+    <div class="pp-meta">
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Role</span><span>UX Researcher · Designer</span></div>
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Tools</span><span>Figma</span></div>
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Outcome</span><span>5-screen interactive prototype ready for user testing.</span></div>
+    </div>
+  </div>
+</div>
+<div id="pp-4" class="pp" style="display:none">
+  <div class="pp-bar">
+    <button class="pp-back" onclick="closePP()">← Back to Portfolio</button>
+    <span class="pp-cat">Electronics · DIY</span>
+  </div>
+  <div class="pp-body" style="position:relative">
+    
+    <div class="pp-title">18650 Powerbank</div>
+    <p class="pp-overview">DIY powerbank using TP4056 charging module, MT3608 boost converter, parallel 18650 Li-ion cells.</p>
+    <div class="pp-meta">
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Role</span><span>Electronics Engineer · 3D Designer</span></div>
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Tools</span><span>Fusion 360, KiCad, 3D Printer</span></div>
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Outcome</span><span>Functional 10,000mAh powerbank with USB-A output.</span></div>
+    </div>
+  </div>
+</div>
+<div id="pp-10" class="pp" style="display:none">
+  <div class="pp-bar">
+    <button class="pp-back" onclick="closePP()">← Back to Portfolio</button>
+    <span class="pp-cat">Type · Tool</span>
+  </div>
+  <div class="pp-body" style="position:relative">
+    
+    <div class="pp-title">New Project</div>
+    <p class="pp-overview">Project overview.</p>
+    <div class="pp-meta">
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Role</span><span>Designer</span></div>
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Tools</span><span>Figma</span></div>
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Outcome</span><span>Outcome.</span></div>
+    </div>
+  </div>
+</div>
+<div id="pp-11" class="pp" style="display:none">
+  <div class="pp-bar">
+    <button class="pp-back" onclick="closePP()">← Back to Portfolio</button>
+    <span class="pp-cat">Type · Tool</span>
+  </div>
+  <div class="pp-body" style="position:relative">
+    
+    <div class="pp-title">New Project</div>
+    <p class="pp-overview">Project overview.</p>
+    <div class="pp-meta">
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Role</span><span>Designer</span></div>
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Tools</span><span>Figma</span></div>
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Outcome</span><span>Outcome.</span></div>
+    </div>
+  </div>
+</div>
+<div id="pp-12" class="pp" style="display:none">
+  <div class="pp-bar">
+    <button class="pp-back" onclick="closePP()">← Back to Portfolio</button>
+    <span class="pp-cat">Type · Tool</span>
+  </div>
+  <div class="pp-body" style="position:relative">
+    
+    <div class="pp-title">New Project</div>
+    <p class="pp-overview">Project overview.</p>
+    <div class="pp-meta">
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Role</span><span>Designer</span></div>
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Tools</span><span>Figma</span></div>
+      <div class="pp-meta-item"><span class="pp-meta-lbl">Outcome</span><span>Outcome.</span></div>
+    </div>
+  </div>
+</div>
+<script>
+const cursor=document.getElementById('cursor');const ring=document.getElementById('cursor-ring');let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}animRing();
+const obs=new IntersectionObserver((entries)=>{entries.forEach((entry,i)=>{if(entry.isIntersecting){setTimeout(()=>entry.target.classList.add('visible'),i*80);}});},{threshold:0.1});document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const skillObs=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.querySelectorAll('.skill-bar').forEach(bar=>{bar.style.transform='scaleX(1)';});}});},{threshold:0.3});document.querySelectorAll('.skill-group').forEach(g=>skillObs.observe(g));
+const heroName=document.querySelector('.hero-name');if(heroName){let gi;const orig=heroName.innerHTML;heroName.addEventListener('mouseenter',()=>{let c=0;gi=setInterval(()=>{if(c++>6){clearInterval(gi);heroName.innerHTML=orig;return;}const chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ';heroName.querySelectorAll('.accent-line').forEach(el=>{const t=el.textContent;el.textContent=t.split('').map(ch=>ch===' '?' ':chars[Math.floor(Math.random()*26)]).join('');});},60);});heroName.addEventListener('mouseleave',()=>{clearInterval(gi);heroName.innerHTML=orig;});}
+function openPP(id){const pp=document.getElementById('pp-'+id);if(!pp)return;pp.style.display='block';requestAnimationFrame(()=>pp.classList.add('pp-open'));document.body.style.overflow='hidden';}
+function closePP(){document.querySelectorAll('.pp.pp-open').forEach(p=>{p.classList.remove('pp-open');setTimeout(()=>{p.style.display='none';},450);});document.body.style.overflow='';}
+</script>
+</body>
+</html>
